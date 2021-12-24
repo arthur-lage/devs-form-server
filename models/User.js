@@ -9,10 +9,12 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true
     },
     cpf: {
       type: String,
       required: true,
+      unique: true
     },
     birthdate: {
       type: Date,
