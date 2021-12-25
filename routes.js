@@ -28,6 +28,8 @@ routes.post("/api/users/register", async (req, res) => {
   try {
     const user = req.body;
 
+    console.log(user)
+
     const sameEmail = await User.find({ email: user.email })
     const sameCPF = await User.find({ cpf: user.cpf })
 
