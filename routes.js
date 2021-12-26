@@ -71,4 +71,15 @@ routes.delete("/api/users/delete/:id", async (req, res) => {
   }
 });
 
+routes.delete("/api/users/delete-all", async (req, res) => {
+  try {
+    await User.deleteMany()
+
+    res.send(200)
+  } catch (e) {
+    return res.sendStatus(409);
+  }
+});
+
+
 module.exports = routes;
