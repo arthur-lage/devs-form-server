@@ -10,7 +10,7 @@ const app = express()
 
 const PORT = process.env.PORT || 3001
 
-const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ilivp.mongodb.net/running-form?retryWrites=true&w=majority`
+const dbUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.ilivp.mongodb.net/dev-form?retryWrites=true&w=majority`
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
