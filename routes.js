@@ -13,12 +13,16 @@ routes.get("/api/users/get", async (req, res) => {
   }
 });
 
-routes.get("/api/users/get-by-id/:id", async (req, res) => {
+routes.get("/api/users/get/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
 
-    return res.send(user);
+    if(user.length === 0) {
+      return res.sendStatus(204)
+    } else {
+      return res.send(user);
+    }
   } catch (e) {
     return res.sendStatus(204);
   }
@@ -28,15 +32,9 @@ routes.post("/api/users/register", async (req, res) => {
   try {
     const user = req.body;
 
-    console.log(user)
-
     const sameEmail = await User.find({ email: user.email })
-    const sameCPF = await User.find({ cpf: user.cpf })
 
     if (sameEmail.length == 0) {
-      console.log("no equal email");
-      if (sameCPF.length == 0) {
-        console.log("no equal cpf");
         await User.create(user).then((result, err) => {
           if (err) {
             return res.sendStatus(500);
@@ -44,14 +42,11 @@ routes.post("/api/users/register", async (req, res) => {
 
           return res.sendStatus(201);
         });
-      } else {
-        return res.send("A user with this CPF already exists!");
-      }
     } else {
       return res.send("A user with this email already exists!");
     }
   } catch (e) {
-    return res.send(e);
+    return res.send(500);
   }
 });
 
@@ -64,7 +59,7 @@ routes.delete("/api/users/delete/:id", async (req, res) => {
         return res.sendStatus(500);
       }
 
-      return res.sendStatus(200);
+      return res.sendStatus(204);
     });
   } catch (e) {
     return res.sendStatus(409);
@@ -75,7 +70,7 @@ routes.delete("/api/users/delete-all", async (req, res) => {
   try {
     await User.deleteMany()
 
-    res.send(200)
+    res.sendStatus(204)
   } catch (e) {
     return res.sendStatus(409);
   }

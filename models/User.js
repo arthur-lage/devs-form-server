@@ -6,25 +6,30 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    surname: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
       unique: true
     },
-    cpf: {
+    developsFor: {
       type: String,
-      required: true,
-      unique: true
+      required: true
     },
-    birthdate: {
-      type: Date,
-      required: true,
-    },
-    bloodType: {
+    seniorityLevel: {
       type: String,
       required: true,
     },
-    distanceToRun: {
+    technologies: [
+      {
+        type: String,
+        required: true
+      }
+    ],
+    about: {
       type: String,
       required: true,
     },
