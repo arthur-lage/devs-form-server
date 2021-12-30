@@ -30,9 +30,16 @@ routes.get("/api/users/get/:id", async (req, res) => {
 
 routes.post("/api/users/register", async (req, res) => {
   try {
-    const user = req.body;
+    const user = {
+      name: req.body.name,
+      surname: req.body.surname,
+      email: req.body.email.toLowerCase(),
+      developsFor: req.body.developsFor,
+      seniorityLevel: req.body.seniorityLevel,
+      technologies: req.body.technologies
+    };
 
-    const sameEmail = await User.find({ email: user.email })
+    const sameEmail = await User.find({ email: user.email.toLowerCase() })
 
     if (sameEmail.length == 0) {
         await User.create(user).then((result, err) => {
