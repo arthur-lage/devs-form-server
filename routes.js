@@ -36,7 +36,8 @@ routes.post("/api/users/register", async (req, res) => {
       email: req.body.email.toLowerCase(),
       developsFor: req.body.developsFor,
       seniorityLevel: req.body.seniorityLevel,
-      technologies: req.body.technologies
+      technologies: req.body.technologies,
+      about: req.body.about
     };
 
     const sameEmail = await User.find({ email: user.email.toLowerCase() })
