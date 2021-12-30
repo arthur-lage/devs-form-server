@@ -43,7 +43,7 @@ routes.post("/api/users/register", async (req, res) => {
           return res.sendStatus(201);
         });
     } else {
-      return res.sendStatus(400).send("A user with this email already exists!");
+      return res.sendStatus(204).send("A user with this email already exists!");
     }
   } catch (e) {
     return res.send(e);
